@@ -36,7 +36,7 @@ A *backend* (or *API backend*) in API Management is an HTTP service that impleme
 
 ## Review the Bicep file
 
-The template used in this quickstart is shown below. It deploys an API Management, two Open AI Services, creates the backends for the two endpoints and then creates the backend pool for those two backends
+The template used in this quickstart is shown below. It deploys an API Management, two Open AI Services, creates the backends for the two endpoints and then creates the backend pool for those two backends.
 
 <!-- :::code language="bicep" source="~/quickstart-templates/quickstarts/microsoft.apimanagement/azure-api-management-create/main.bicep"::: -->
 
@@ -300,18 +300,43 @@ resource apimSubscription 'Microsoft.ApiManagement/service/subscriptions@2023-05
 }
 
 ```
+Now, review the policy that need to be placed in API Management
 
-The following resource is defined in the Bicep file:
+```xml
+<policies>
+    <inbound>
+        <base />
+        <authentication-managed-identity resource="https://cognitiveservices.azure.com" output-token-variable-name="managed-id-access-token" ignore-error="false" /> 
+        <set-header name="Authorization" exists-action="override">  
+            <value>@("Bearer " + (string)context.Variables["managed-id-access-token"])</value>  
+        </set-header>
+        <set-backend-service backend-id="openai-backend-pool" />
+    </inbound>
+    <backend>
+        <base />
+    </backend>
+    <outbound>
+        <base />
+    </outbound>
+    <on-error>
+        <base />
+    </on-error>
+</policies>
+
+```
+
+<!-- The following resource is defined in the Bicep file:
 
 - **[Microsoft.ApiManagement/service/backends](/azure/templates/microsoft.apimanagement/service/backends)**
 
-More Azure API Management Bicep samples can be found in [Azure Quickstart Templates](https://azure.microsoft.com/resources/templates/?resourceType=Microsoft.Apimanagement&pageNumber=1&sort=Popular).
+More Azure API Management Bicep samples can be found in [Azure Quickstart Templates](https://azure.microsoft.com/resources/templates/?resourceType=Microsoft.Apimanagement&pageNumber=1&sort=Popular). -->
 
 ## Deploy the Bicep file
 
 You can use Azure CLI or Azure PowerShell to deploy the Bicep file.  For more information about deploying Bicep files, see [Deploy](../azure-resource-manager/bicep/deploy-cli.md).
 
 1. Save the Bicep file as **main.bicep** to your local computer.
+1. In the same folder, save the XML file as **policy.xml** to your local computer
 1. Deploy the Bicep file using either Azure CLI or Azure PowerShell.
 
     # [CLI](#tab/CLI)
