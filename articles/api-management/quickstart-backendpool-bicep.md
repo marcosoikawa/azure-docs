@@ -19,6 +19,8 @@ This quickstart describes how to use a Bicep file to create an backend pool in A
 
 A *backend* (or *API backend*) in API Management is an HTTP service that implements your front-end API and its operations.
 
+API Management supports *backend pools*, when you want to implement multiple backends for an API and load-balance requests across those backends.
+
 [!INCLUDE [About Bicep](~/reusable-content/ce-skilling/azure/includes/resource-manager-quickstart-bicep-introduction.md)]
 
 ## Prerequisites
