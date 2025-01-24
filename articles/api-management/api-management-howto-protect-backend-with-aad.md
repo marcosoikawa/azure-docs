@@ -93,6 +93,8 @@ For details about app registration, see [Quickstart: Configure an application to
 
 * To learn more about how to build an application and implement OAuth 2.0, see [Microsoft Entra code samples](../active-directory/develop/sample-v2-code.md).
 
+* For a quick start example of how to configure APIM with OAuth 2.0 with Entra ID using App Roles for Authentication and Authorization for an custom application (e.g. SPA), see [API Authentication with API Management (APIM) using APIM Policies with Entra ID and App Roles](https://github.com/microsoft/apim-auth-entraid-with-approles?tab=readme-ov-file#api-authentication-with-api-management-apim-using-apim-policies-with-entra-id-and-app-roles)
+
 * For an end-to-end example of configuring OAuth 2.0 user authorization in the API Management developer portal, see [How to authorize test console of developer portal by configuring OAuth 2.0 user authorization](api-management-howto-oauth2.md).
 
 - Learn more about [Microsoft Entra ID and OAuth2.0](../active-directory/develop/authentication-vs-authorization.md).
